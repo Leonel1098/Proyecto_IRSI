@@ -4,7 +4,7 @@ from tkinter import Frame
 from tkinter import Button, filedialog,Label,messagebox
 
 #Variables globales
-Data_File = "Usuarios.txt"
+Data_File = "Biblioteca/Usuarios.txt"
 usuarios_dic = {}
 
 class Usuarios:

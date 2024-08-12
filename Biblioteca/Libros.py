@@ -5,7 +5,7 @@ from tkinter import Frame
 from tkinter import Button, Label, Entry, messagebox
 
 #Variables globales
-Data_File = "Libros.txt"
+Data_File = "Biblioteca/Libros.txt"
 libros_dic = {}
 
 class Libros:
