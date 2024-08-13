@@ -52,3 +52,9 @@ class Morosidad:
         button_regresar.pack()
         button_regresar.config(bg="black")
         button_regresar.place(x=370, y=265, width=110, height=20)
+
+
+    #Este metodo sirve para ocultar la ventana en la que se trabaja al regresar a la ventana principal
+    def regresar(self, ventana):
+        self.ventana_principal.deiconify()
+        ventana.destroy()

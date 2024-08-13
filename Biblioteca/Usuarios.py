@@ -13,6 +13,7 @@ class Usuarios:
         self.ventana_principal = ventana_principal
         self.usuarios_dic = {}
 
+    
     def cargar_usuarios(self):
         try:
             with open(Data_File, 'r') as archivo:
@@ -40,7 +41,7 @@ class Usuarios:
     #Con este metodo actualizo los valores que se agregan al combobox cada vez que se elimina un usuario
     def actualizar_combobox(self, combobox):
         combobox['values'] = list(self.usuarios_dic.keys())
-        #combobox.current(0)
+        combobox.current(0)
         print(list(self.usuarios_dic.keys()))
 
     #En este metodo leemos los valores ingresados por el usuario en los Entry y los guardamos en un archivo txt.

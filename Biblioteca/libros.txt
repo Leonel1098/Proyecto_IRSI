@@ -4,3 +4,4 @@ Nombre del Libro: Alemania, Autor: Brasil, Codigo ISBN: 2014
 Nombre del Libro: Argentina, Autor: Quatar, Codigo ISBN: 2022
 Nombre del Libro: Brasil, Autor: Japon, Codigo ISBN: 2002
  
+Nombre del Libro: Italia, Autor: Alemania, Codigo ISBN: 2006
