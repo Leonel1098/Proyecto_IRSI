@@ -1,3 +1,4 @@
+#Importando librerias
 from tkinter import Tk,ttk
 from tkcalendar import DateEntry
 import tkinter as tk
@@ -6,18 +7,23 @@ from tkinter import Frame
 from tkinter import Button, filedialog,Label,messagebox
 from Libros import Libros
 from Usuarios import Usuarios
+
+#Declaracion de variables
 Data_Libros = "Biblioteca/Libros.txt"
 Data_Prestamos = "Biblioteca/Prestamos.txt"
+Data_Devoluciones = "Biblioteca/Devoluciones.txt"
 Data_User = "Biblioteca/Usuarios.txt"
 
 class Prestamos:
 
+    #Metodo constructor que crea la instancia con la ventana principal
     def __init__(self, ventana_principal):
         self.ventana_principal = ventana_principal
         self.libros_dic = {}
         self.usuarios_dic = {}
 
-
+    #Con este metodo cargamos el archivo txt que contiene los libros guardados y obtenemos su isbn para 
+    #cargarlos en los combobox
     def cargar_libros(self):
         try:
             with open(Data_Libros, 'r') as archivo:
@@ -37,7 +43,9 @@ class Prestamos:
         except FileNotFoundError:
             messagebox.showwarning(title="Carga de Archivo", message=f"Advertencia, El archivo {Data_Libros} no esta creado aun")
         return self.libros_dic
-    
+
+    #Con este metodo cargamos el archivo txt que contiene los usuraios guardados y obtenemos su id para 
+    #cargarlos en los combobox 
     def cargar_usuarios(self):
         try:
             with open(Data_User, 'r') as archivo:
@@ -60,7 +68,8 @@ class Prestamos:
         except Exception as e:
             messagebox.showerror(title="Error", message=f"Ocurrió un error al cargar el archivo: {e}")
         return self.usuarios_dic
-    
+
+    #Se agrega a los combobox los datos que se usan para realizar el prestamo de los libros 
     def configurar_combo_boxes(self, combobox_id_usuario, combobox_isbn):
         self.combobox_id_usuario = combobox_id_usuario
         self.combobox_isbn = combobox_isbn
@@ -70,7 +79,9 @@ class Prestamos:
         # Limpiar los ComboBox actuales
         self.combobox_id_usuario['values'] = list(usuarios.keys())
         self.combobox_isbn['values'] = list(libros.keys())
-        
+
+     #Con este metodo se obtiene los datos seleccionados por el usuario en los combobox 
+     #y se crea el archivo Prestamos.txt que guarda todos los datos de los prestamos realizados.   
     def registrar_prestamo(self):
         usuario_id = self.combobox_id_usuario.get()
         libro_isbn = self.combobox_isbn.get()
@@ -79,14 +90,14 @@ class Prestamos:
         if usuario_id and libro_isbn and fecha_inicio:
             try:
                 with open(Data_Prestamos, 'a') as f:
-                    f.write(f"{libro_isbn}, {usuario_id}, {fecha_inicio}\n")
+                    f.write(f"Código ISBN: {libro_isbn}, ID Usuario: {usuario_id}, Fecha de Préstamo: {fecha_inicio}\n")
                 print(f"Préstamo registrado: {libro_isbn}, {usuario_id}, {fecha_inicio}")
             except Exception as e:
                 print(f"Error al registrar el préstamo: {e}")
         else:
             print("Por favor, complete todos los campos.")
 
-
+    #En este metodo se crea el archivo Devoluciones.txt que guarda los datos de las devoluciones realizadas.
     def devolver_libro(self):
         usuario_id = self.combobox_id_usuario.get()
         libro_isbn = self.combobox_isbn.get()
@@ -97,13 +108,13 @@ class Prestamos:
             try:
                 # Leer los datos de los préstamos existentes
                 prestamos = []
-                with open('prestamos.txt', 'r') as f:
+                with open(Data_Prestamos, 'r') as f:
                     prestamos = f.readlines()
                 
-                with open('prestamos.txt', 'w') as f:
+                with open(Data_Devoluciones, 'w') as f:
                     for prestamo in prestamos:
                         if prestamo.startswith(f"{libro_isbn}, {usuario_id},"):
-                            f.write(f"{libro_isbn}, {usuario_id}, {fecha_entrega}\n")
+                            f.write(f"Codigo ISBN: {libro_isbn}, ID Usuario: {usuario_id}, Fecha de Devolución:{fecha_entrega}\n")
                         else:
                             f.write(prestamo)
                 
@@ -174,7 +185,7 @@ class Prestamos:
         button_prestar.config(bg="black")
         button_prestar.place(x=430, y=130, width=110, height=20)
 
-        button_devolver = Button(prestamos_Frame, text="Devolver Libro", font=("Modern", 12), foreground="white", highlightthickness=2)
+        button_devolver = Button(prestamos_Frame, text="Devolver Libro", command= self.devolver_libro, font=("Modern", 12), foreground="white", highlightthickness=2)
         button_devolver.pack()
         button_devolver.config(bg="black")
         button_devolver.place(x=430, y=170, width=110, height=20)
@@ -183,6 +194,9 @@ class Prestamos:
         button_regresar.pack()
         button_regresar.config(bg="black")
         button_regresar.place(x=430, y=265, width=110, height=20)
+
+    
+    #Este metodo sirve para ocultar la ventana en la que se trabaja al regresar a la ventana principal
 
     def regresar(self, ventana):
         ventana.destroy()

@@ -12,16 +12,6 @@ from Prestamos import Prestamos
 
 
 class Interfaz:
-    
-    """#Varibles que contienen los metodos de las ventanas de las otras clases
-    ventana_libros = Libros.ventana_Libros
-    guardar_libros = Libros.guardar_libros
-    cargar_libros = Libros.cargar_libros
-    eliminar_libro = Libros.eliminar_libro
-    actualizar_combobox = Libros.actualizar_combobox
-    ventana_prestamos = Prestamos.ventana_Prestamo
-    ventana_morosidad = Morosidad.ventana_Morosidad
-    ventana_usuarios = Usuarios.ventana_Usuarios"""
 
     #Metodo constructor, inicializa la ventana principal y crea las instancias de las otras clases para trabajar con sus metodos
     def __init__(self, root):
