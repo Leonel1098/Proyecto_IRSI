@@ -1,2 +1,3 @@
+Codigo ISBN: 2010, ID Usuario: 001, Fecha de Prestamo: 2024-08-12
 Codigo ISBN: 2018, ID Usuario: 002, Fecha de Prestamo: 2024-08-13
 Codigo ISBN: 2022, ID Usuario: 004, Fecha de Prestamo: 2024-08-16

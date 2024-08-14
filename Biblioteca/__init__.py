@@ -1,14 +1,16 @@
 #Importaciones de las librerias
 from tkinter import Tk
 import tkinter as tk
+import os
 from tkinter import Frame
-from tkinter import Button, filedialog,Label
+from tkinter import Button, filedialog,Label,messagebox
 
 #Importando las otras clases 
 from Libros import Libros 
 from Usuarios import Usuarios
 from Morosidad import Morosidad
 from Prestamos import Prestamos
+from Utilidades import Utilidades
 
 
 class Interfaz:
@@ -22,6 +24,7 @@ class Interfaz:
         self.usuarios = Usuarios(self.ventana_principal)
         self.morosidad = Morosidad(self.ventana_principal)
         self.prestamos = Prestamos(self.ventana_principal)
+        self.utilidades = Utilidades(self.ventana_Principal)
         
         # lama al metodo que contiene toda la configuracion de la ventana principal del programa
         self.ventana_Principal()
@@ -60,7 +63,7 @@ class Interfaz:
         button_prestamo.config(bg = "black")
         button_prestamo.place(x =295,y= 250, width= 100, height  = 40)
 
-        button_utilidades = Button(p_Frame, text="Abrir Archivo",font=("Modern", 16), foreground = "white", highlightthickness=2)
+        button_utilidades = Button(p_Frame, text="Abrir Archivo",font=("Modern", 16),command= self.cargar_archivo, foreground = "white", highlightthickness=2)
         button_utilidades.pack()
         button_utilidades.config(bg = "black")
         button_utilidades.place(x =395, y = 250, width= 120, height  = 40)
@@ -85,6 +88,9 @@ class Interfaz:
 
     def abrir_ventana_morosidad(self):
         self.morosidad.ventana_Morosidad()
+
+    def cargar_archivo(self):
+        self.utilidades.abrir_archivo()
 
     #Este metodo sirve para ocultar la ventana en la que se trabaja al regresar a la ventana principal
     def regresar(self, ventana):
